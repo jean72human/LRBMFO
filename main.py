@@ -42,8 +42,10 @@ if "SLURM_CPUS_PER_TASK" in os.environ:
     cpus = int(os.environ["SLURM_CPUS_PER_TASK"])
     print("Dectected %s CPUs through slurm" % cpus)
 else:
-    cpus = 6  # os.cpu_count() #or specify manually how many CPUs
-    print("Running on default number of CPUs (default: all=%s)" % cpus)
+
+    cpus = os.cpu_count() #or specify manually how many CPUs
+    print("Running on default number of CPUs (default: all=%s)"%cpus)
+
 
 
 # COSTS
@@ -324,7 +326,6 @@ def main(
     print(type(B))
     os.makedirs(os.path.dirname(save), exist_ok=True)
     torch.manual_seed(seed)
-    print(experiments)
     combi = build_combinations(
         N_REP, experiments, costs, methods, cond_var, cond_ig, jointmogp, seed
     )
@@ -340,6 +341,7 @@ def main(
                 functools.partial(parallel_eval, combi, B, save, verbose), range(len(combi))
             )
             p.close()
+
     # RES = [eval_model(combi[x], B, save, verbose, device=args['device']) for x in range(len(combi))]
     torch.save(RES, f"{save}_results.pt")
     print(RES)

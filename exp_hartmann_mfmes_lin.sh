@@ -2,15 +2,15 @@
 
 EXP="Hartmann"
 COSTS="0.2"
-METHODS="SF-MES"
+METHODS="MF-MES"
 COND_VAR="0.1"
 COND_IG="0.1"
 N_REP=20
-BUDGET=300
+BUDGET=100
 SEED=72
-RESULTFOLDER="results_exp_hartmann_sfmes_lin"
+RESULTFOLDER="results_exp_hartmann_mfmes_lin"
 MOGP="lineartruncated"
-NAME="exp_hartmann_sfmes_lin"
+NAME="exp_hartmann_mfmes_lin"
 VERBOSE=0
 DEVICE='cuda:0'
 

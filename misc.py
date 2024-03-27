@@ -234,7 +234,7 @@ def get_problem_settings(experiment: str = "Hartmann", cost: float = .2, device=
     tkwargs['device'] = device
     if experiment=="Hartmann":
         ndim = 6
-        problem = Hartmann(noise_std=.01).to(**tkwargs)
+        problem = Hartmann(noise_std=.1).to(**tkwargs)
         bounds = torch.tensor([[0.0] * (ndim + 1), [1.0] * (ndim + 1)], **tkwargs)
         fmax = problem._optimal_value
         list_fidelities = [cost,1.0]
