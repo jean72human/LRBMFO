@@ -31,6 +31,7 @@ class MFBO:
 
         self.ndim = ndim
         self.list_fidelities = list_fidelities
+        print(list_fidelities)
         self.target_fidelities = {ndim: list_fidelities[-1]}
         self.fidelities = torch.tensor(list_fidelities, **self.tkwargs)
         self.bounds = bounds
@@ -180,7 +181,12 @@ class MFBO:
             options={"batch_limit": 5, "maxiter": 200},
         )
         # add the fidelity parameter
-        device = "cuda" if torch.cuda.is_available else "cpu"
+        try:
+            device = "cuda" if torch.cuda.is_available else "cpu"
+            final_rec = final_rec.to(device)
+        except:
+            device = "cpu"
+            final_rec = final_rec.to(device)
         candidates = torch.cat((candidates.to(device), torch.ones(1, device=device).unsqueeze(-2)), dim=1)
         return candidates, MES
 
@@ -320,8 +326,13 @@ class MFBO:
             raw_samples=512,
             options={"batch_limit": 5, "maxiter": 200},
         )
-        device = "cuda" if torch.cuda.is_available else "cpu"
-        final_rec = final_rec.to(device)
+        try:
+            device = "cuda" if torch.cuda.is_available else "cpu"
+            final_rec = final_rec.to(device)
+        except:
+            device = "cpu"
+            final_rec = final_rec.to(device)
+        
         final_rec = rec_acqf._construct_X_full(final_rec).to(device) if model.__class__.__name__ != "SingleTaskGP" else torch.cat((final_rec, torch.ones(1, device=device).unsqueeze(-2)), dim=1)
         return final_rec
 

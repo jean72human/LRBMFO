@@ -230,6 +230,7 @@ from problems import * # importing it here instead of before prevents circular i
 
 
 def get_problem_settings(experiment: str = "Hartmann", cost: float = .2, device='cuda'):
+    print("Experiment: ", experiment)
     tkwargs['device'] = device
     if experiment=="Hartmann":
         ndim = 6
