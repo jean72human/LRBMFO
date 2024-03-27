@@ -199,7 +199,7 @@ def main(save, N_REP, B, methods, seed, verbose, cond_var, cond_ig, experiments,
     combi = build_combinations(N_REP, experiments, costs, methods, cond_var, cond_ig, jointmogp, seed)
     selected_pool = mp.Pool(processes=cpus)
     with selected_pool as p:
-        RES = p.map(functools.partial(parallel_eval, combi, B, save, verbose), range(len(combi)))
+        RES = p.map(functools.partial(parallel_eval, combi, B, save, verbose, device=args['device']), range(len(combi)))
     p.close()
     # RES = [eval_model(combi[x], B, save, verbose, device=args['device']) for x in range(len(combi))]
     torch.save(RES, f"{save}_results.pt")

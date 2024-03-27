@@ -237,7 +237,7 @@ def get_problem_settings(experiment: str = "Hartmann", cost: float = .2, device=
         bounds = torch.tensor([[0.0] * (ndim + 1), [1.0] * (ndim + 1)], **tkwargs)
         fmax = problem._optimal_value
         list_fidelities = [cost,1.0]
-        ninits = [5*ndim,4*ndim]
+        ninits = [2*ndim,2*ndim]
 
         # Takeno et al. (2020) setting, budget = 300/5 = 60
         #list_fidelities = [0.2,0.6,1.0]
