@@ -1,6 +1,6 @@
 #!/bin/bash
 
-EXP="Hartmann"
+EXP="Branin"
 COSTS="0.2"
 METHODS="SF-MES"
 COND_VAR="0.1"
@@ -8,9 +8,9 @@ COND_IG="0.1"
 N_REP=20
 BUDGET=300
 SEED=72
-RESULTFOLDER="results_exp_hartmann_sfmes_lin"
+RESULTFOLDER="results_exp_branin_sfmes_lin"
 MOGP="lineartruncated"
-NAME="exp_hartmann_sfmes_lin"
+NAME="exp_branin_sfmes_lin"
 VERBOSE=0
 DEVICE='cuda:0'
 

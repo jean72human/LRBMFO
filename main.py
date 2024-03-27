@@ -24,7 +24,7 @@ if 'SLURM_CPUS_PER_TASK' in os.environ:
     cpus = int(os.environ['SLURM_CPUS_PER_TASK'])
     print("Dectected %s CPUs through slurm"%cpus)
 else:
-    cpus = 6 #os.cpu_count() #or specify manually how many CPUs
+    cpus = os.cpu_count() #or specify manually how many CPUs
     print("Running on default number of CPUs (default: all=%s)"%cpus)
 
 
@@ -198,7 +198,6 @@ def main(save, N_REP, B, methods, seed, verbose, cond_var, cond_ig, experiments,
     torch.manual_seed(seed)
     combi = build_combinations(N_REP, experiments, costs, methods, cond_var, cond_ig, jointmogp, seed)
     selected_pool = mp.Pool(processes=cpus)
-    # torch.multiprocessing.set_start_method('spawn')
     with selected_pool as p:
         RES = p.map(functools.partial(parallel_eval, combi, B, save, verbose), range(len(combi)))
     p.close()

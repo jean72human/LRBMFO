@@ -149,7 +149,7 @@ class Branin(AugmentedBranin):
         if self.negate:
             H = - H
         H = (H - self._min_)/(self._max_-self._min_)  # normalize
-        return torch.where(torch.tensor(is_primary_source(X)), H + self.noise_std * torch.randn_like(H) , H)
+        return torch.where(torch.tensor(is_primary_source(X)), H + self.noise_std * torch.randn_like(H, device=X.device) , H)
 
 
 class HartmannRosenbrock():
