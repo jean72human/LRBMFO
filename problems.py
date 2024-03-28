@@ -21,7 +21,7 @@ class Hartmann(AugmentedHartmann):
         H = -super().evaluate_true(X)  #non-negated is not intresting objective
         H = (H - self._min_)/(self._max_-self._min_)  # normalize
         H = H.to(self.device)
-        return torch.where(torch.tensor(is_primary_source(X), device=self.device), H + self.noise_std * torch.randn_like(H, device=self.device) , H)
+        return torch.where(torch.tensor(is_primary_source(X), device=self.device), H  + (self.noise_std/10) * torch.randn_like(H, device=self.device), H + self.noise_std * torch.randn_like(H, device=self.device))
 
 
 class HartmannCost():
