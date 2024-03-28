@@ -8,11 +8,11 @@ COND_IG="0.1"
 N_REP=100
 BUDGET=100
 SEED=72
-RESULTFOLDER="results_exp_hartmann_mfkg_miso"
-MOGP="miso"
-NAME="exp_hartmann_mfmes_miso"
-VERBOSE=1
-DEVICE='cuda:0'
+RESULTFOLDER="results_exp_hartmann_mfmes_downsampled"
+MOGP="downsampling"
+NAME="exp_hartmann_mfmes_downsampled"
+VERBOSE=0
+DEVICE='cpu'
 
 
 echo -e "FUNCTIONS=$EXP\nCOSTS=$COSTS\nMETHODS=$METHODS\nCONDITION_VAR=$COND_VAR\nCONDITION_IG=$COND_IG\nN_REPS=$N_REP\nBUDGET=$BUDGET\nSEED=$SEED" > "$RESULTFOLDER/config_$NAME.txt"

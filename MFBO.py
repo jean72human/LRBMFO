@@ -89,8 +89,8 @@ class MFBO:
                 model = SingleTaskMultiFidelityGP(train_x, train_obj, linear_truncated=True,
                                   outcome_transform=Standardize(m=1), data_fidelity=self.ndim)
             elif self.jointmogp == "miso":
-                model = SingleTaskMultiFidelityGPMiso(train_x, train_obj, linear_truncated=False, miso=True,
-                                      outcome_transform=Standardize(m=1), data_fidelity=self.ndim)
+                model = SingleTaskMultiFidelityGP(train_x, train_obj, linear_truncated=False,
+                                  outcome_transform=Standardize(m=1), data_fidelity=self.ndim)
         mll = ExactMarginalLogLikelihood(model.likelihood, model)
         return mll, model
 

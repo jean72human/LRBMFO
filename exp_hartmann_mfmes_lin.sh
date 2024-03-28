@@ -5,13 +5,13 @@ COSTS="0.2"
 METHODS="MF-MES"
 COND_VAR="0.1"
 COND_IG="0.1"
-N_REP=5
+N_REP=100
 BUDGET=100
 SEED=72
 RESULTFOLDER="results_exp_hartmann_mfmes_lin"
 MOGP="lineartruncated"
 NAME="exp_hartmann_mfmes_lin"
-VERBOSE=0
+VERBOSE=1
 DEVICE='cpu'
 
 
