@@ -332,7 +332,7 @@ def main(
     
     if single:
         for comb in combi:
-            eval_model(comb, B, save, verbose, device="cpu")
+            RES = eval_model(comb, B, save, verbose, device="cpu")
     else:
         selected_pool = mp.Pool(processes=6)
         with selected_pool as p:
