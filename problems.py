@@ -24,6 +24,22 @@ class Hartmann(AugmentedHartmann):
         return torch.where(torch.tensor(is_primary_source(X), device=self.device), H  + (self.noise_std/10) * torch.randn_like(H, device=self.device), H + self.noise_std * torch.randn_like(H, device=self.device))
 
 
+class Hartmann_fixed(AugmentedHartmann):
+    def __init__(self, noise_std: Optional[float] = None):
+        super().__init__(noise_std=noise_std)
+        self._max_ = 3.322367993160791
+        self._min_ = 0.0
+        self._optimal_value = 1.0
+        self._pis = "hartmann"
+        self._ais = "hartmann_low"
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    def __call__(self, X: Tensor) -> Tensor:
+        H = -super().evaluate_true(X)  #non-negated is not intresting objective
+        H = (H - self._min_)/(self._max_-self._min_)  # normalize
+        H = H.to(self.device)
+        return torch.where(torch.tensor(is_primary_source(X), device=self.device), H  , H + self.noise_std * torch.randn_like(H, device=self.device))
+
+
 class HartmannCost():
     def __init__(self, noise_std: Optional[float] = None):
         self.noise_std = noise_std

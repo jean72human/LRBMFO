@@ -42,13 +42,10 @@ if "SLURM_CPUS_PER_TASK" in os.environ:
     cpus = int(os.environ["SLURM_CPUS_PER_TASK"])
     print("Dectected %s CPUs through slurm" % cpus)
 else:
-<<<<<<< HEAD
-    cpus = 6  # os.cpu_count() #or specify manually how many CPUs
-    print("Running on default number of CPUs (default: all=%s)" % cpus)
-=======
+
     cpus = os.cpu_count() #or specify manually how many CPUs
     print("Running on default number of CPUs (default: all=%s)"%cpus)
->>>>>>> main
+
 
 
 # COSTS
@@ -335,7 +332,7 @@ def main(
     
     if single:
         for comb in combi:
-            eval_model(comb, B, save, verbose, device="cpu")
+            RES = eval_model(comb, B, save, verbose, device="cpu")
     else:
         selected_pool = mp.Pool(processes=6)
         with selected_pool as p:
